@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+   
+       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+		<title>Login</title>
+		<link href="images/favicon.ico" rel="SHORTCUT ICON">
+  </head> 
+  <style type="text/css">
+   
+	 body {
+      background: url('http://vignette1.wikia.nocookie.net/vsbattles/images/a/a3/Black-windows_542931.jpg/revision/latest?cb=20150317090032') fixed;
+    }
+	
+  </style>
+    
+    
+  <body >
+  <header>
+  <div class="ui inverted segment">
+		<div class="ui  violet basic  inverted masssive center button" onclick="location.href='' " ><a>Back to the mainpage</a></div>      
+  </div>
+  </header>
+  <br></br>
+
+  <h1 class="ui center inverted aligned icon header">
+	<i class="circular inverted user icon"></i>
+  </h1>
+    <br></br>
+
+   <div class="ui grid">
+   
+       <div class = "four wide column" ></div>
+       <div class = "eight wide column" >
+       <div class="ui   segment">
+            <div class="ui two column middle aligned very relaxed stackable grid">
+  <div class="column">
+    <div class="ui  form ">
+      <div class="field">
+        <label>Username</label>
+        <div class="ui left icon input">
+          <input type="text" id = "account" placeholder="Username">
+          <i class="user icon"></i>
+        </div>
+      </div>
+      <div class="field ">
+        <label >Password</label>
+        <div class="ui left icon input">
+          <input type="password" id="pwd">
+          <i class="lock icon"></i>
+        </div>
+      </div>
+      <div class="ui blue submit button" id="signIn">Login</div>
+    </div>
+  </div>
+          
+  <div class="ui vertical  divider">
+    Or
+  </div>
+  <div class="center aligned column">
+      
+    <div class="ui big green labeled icon button" id="signUp" onclick="location.href='' ">
+      <i class="signup icon"></i>
+      Sign Up
+    </div>
+  </div>
+</div>
+</div>
+       </div>
+           
+       <div class = "four wide column" ></div>
+   </div>  
+      
+     <footer>
+	 
+</footer>	
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="./sha256.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    $('#signIn').click(loginFunc);
+
+    function loginFunc(){
+        var UserData = {
+            username : $('#account').val(),
+            password : sha256($('#pwd').val())
+        };
+        console.log(UserData.username);
+        socket.emit('loginHandler', UserData);
+        socket.on('loginReturn', function(data){
+            console.log(data);
+            if(data == 'correct')
+               window.location.href = "http://127.0.0.1:8080/ticket"
+            else if(data == 'error')
+                alert('Error login');
+            else if(data == 'badError')
+                alert('Do not attempt SQL injection');
+            else if(data == 'passError')
+                alert('Password is wrong');
+            else if(data == 'userError')
+                alert('Username is wrong');
+        });
+    }
+</script>
