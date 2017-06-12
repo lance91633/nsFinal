@@ -1,0 +1,29 @@
+{
+  "name": "nsfinal",
+  "version": "1.0.0",
+  "dependencies" :{
+    "express": "4.15.3",
+    "mysql": "2.13.0",
+    "nodeadmin": "0.1.2",
+    "socket.io": "2.0.2"
+  },
+  "description": "nsfinal",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lance91633/nsFinal.git"
+  },
+  "keywords": [
+    "nsfinal"
+  ],
+  "author": "lance huang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lance91633/nsFinal/issues"
+  },
+  "homepage": "https://github.com/lance91633/nsFinal#readme"
+}
